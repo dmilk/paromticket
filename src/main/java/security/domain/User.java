@@ -2,6 +2,8 @@ package security.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by 1 on 24.04.2014.
@@ -32,6 +34,13 @@ public class User {
 
     @Column(name = "comment")
     private String comment;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role", joinColumns = {
+            @JoinColumn(name = "user_id", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "role_id",
+                    nullable = false, updatable = false) })
+    private Set<Role> roles = new HashSet<Role>();
 
     public User() {
     }
@@ -91,6 +100,15 @@ public class User {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public Set<Role> getRoles() {
+        return this.roles;
+    }
+
+    public void setRoles(Set<Role> categories) {
+        this.roles = categories;
+    }
+
 }
 
 
