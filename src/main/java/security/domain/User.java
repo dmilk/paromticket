@@ -1,5 +1,6 @@
 package security.domain;
 
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -17,16 +18,16 @@ public class User {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "username")
-    private String username;
+//    @Column(name = "username")
+//    private String username;
 
-    @Column(name = "password")
-    private String password;
+//    @Column(name = "password")
+//    private String password;
 
     @Column(name = "date_reg")
     private Date dateReg;
 
-    @Column(name = "fisrt_name")
+    @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
@@ -35,7 +36,15 @@ public class User {
     @Column(name = "comment")
     private String comment;
 
+//    @Column(name = "auth_id")
+//    private Long authId;
+
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @JoinColumn(name="auth_id")
+    private Auth auth;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @OnDelete(action= OnDeleteAction.CASCADE)
     @JoinTable(name = "user_role", joinColumns = {
             @JoinColumn(name = "user_id", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "role_id",
@@ -53,21 +62,21 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
+//    public String getUsername() {
+//        return username;
+//    }
+//
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
     public Date getDateReg() {
         return dateReg;
@@ -109,6 +118,22 @@ public class User {
         this.roles = categories;
     }
 
+//    public Long getAuthId() {
+//        return authId;
+//    }
+//
+//    public void setAuthId(Long authId) {
+//        this.authId = authId;
+//    }
+
+
+    public Auth getAuth() {
+        return auth;
+    }
+
+    public void setAuth(Auth auth) {
+        this.auth = auth;
+    }
 }
 
 

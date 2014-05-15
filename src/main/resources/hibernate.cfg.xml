@@ -27,11 +27,12 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
 
-        <property name="hbm2ddl.auto">validate</property>
+        <property name="hbm2ddl.auto">update</property>
 
         <!--<mapping resource="Event.hbm.xm_"/>-->
-        <mapping class="security.domain.user"/>
-        <mapping class="security.domain.role"/>
+        <mapping class="security.domain.User"/>
+        <mapping class="security.domain.Role"/>
+        <mapping class="security.domain.Auth"/>
 
 
     </session-factory>

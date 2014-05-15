@@ -11,6 +11,7 @@
 
     <properties>
         <jersey-version>2.7</jersey-version>
+        <sql-version>5.1.9</sql-version>
     </properties>
 
     <dependencies>
@@ -23,7 +24,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.9</version>
+            <version>${sql-version}</version>
         </dependency>
 
         <dependency>
@@ -43,6 +44,11 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.6</version>
         </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
 
         <dependency>
             <groupId>javassist</groupId>
@@ -51,50 +57,55 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>org.glassfish.grizzly</groupId>-->
-            <!--<artifactId>grizzly-http-servlet</artifactId>-->
-            <!--<version>2.3.11</version>-->
+        <!--<groupId>org.glassfish.grizzly</groupId>-->
+        <!--<artifactId>grizzly-http-servlet</artifactId>-->
+        <!--<version>2.3.11</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>org.glassfish.jersey.containers</groupId>-->
-            <!--<artifactId>jersey-container-grizzly2-http</artifactId>-->
-            <!--<version>2.7</version>-->
+        <!--<groupId>org.glassfish.jersey.containers</groupId>-->
+        <!--<artifactId>jersey-container-grizzly2-http</artifactId>-->
+        <!--<version>2.7</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>2.7</version>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>org.glassfish.jersey.containers</groupId>-->
+        <!--<artifactId>jersey-container-grizzly2-servlet</artifactId>-->
+        <!--<version>2.7</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>org.glassfish.jersey.containers</groupId>-->
-            <!--<artifactId>jersey-container-servlet</artifactId>-->
-            <!--<version>2.7</version>-->
+        <!--<groupId>org.glassfish.jersey.test-framework.providers</groupId>-->
+        <!--<artifactId>jersey-test-framework-provider-inmemory</artifactId>-->
+        <!--<version>2.7</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>org.glassfish.jersey.containers</groupId>-->
-            <!--<artifactId>jersey-container-grizzly2-servlet</artifactId>-->
-            <!--<version>2.7</version>-->
+        <!--<groupId>org.glassfish.jersey.test-framework.providers</groupId>-->
+        <!--<artifactId>jersey-test-framework-provider-grizzly2</artifactId>-->
+        <!--<version>2.7</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>org.glassfish.jersey.test-framework.providers</groupId>-->
-            <!--<artifactId>jersey-test-framework-provider-inmemory</artifactId>-->
-            <!--<version>2.7</version>-->
+        <!--<groupId>org.apache.tomcat</groupId>-->
+        <!--<artifactId>tomcat-annotations-api</artifactId>-->
+        <!--<version>7.0.37</version>-->
         <!--</dependency>-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+        </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.glassfish.jersey.test-framework.providers</groupId>-->
-            <!--<artifactId>jersey-test-framework-provider-grizzly2</artifactId>-->
-            <!--<version>2.7</version>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>org.apache.tomcat</groupId>-->
-            <!--<artifactId>tomcat-annotations-api</artifactId>-->
-            <!--<version>7.0.37</version>-->
-        <!--</dependency>-->
     </dependencies>
 
     <build>
-        <!--<finalName>xxx</finalName>-->
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -106,7 +117,44 @@
                     <path>/</path>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${sql-version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>jdbc:mysql://95.143.14.125:3306/restservice</url>
+                    <username>notreal</username>
+                    <password>password</password>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>src/main/resources/sql/user.sql</srcFile>
+                                <srcFile>src/main/resources/sql/role.sql</srcFile>
+                                <srcFile>src/main/resources/sql/user_role.sql</srcFile>
+                                <srcFile>src/main/resources/sql/auth.sql</srcFile>
+                                <!--<onError>continue</onError>-->
+                            </srcFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+
     </build>
 
 
