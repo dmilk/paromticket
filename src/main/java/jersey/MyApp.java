@@ -7,7 +7,7 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import javax.ws.rs.ApplicationPath;
 
 
-@ApplicationPath("/qqq")
+@ApplicationPath("/order")
 public class MyApp extends ResourceConfig {
     public MyApp() {
         //super(TodosResource.class);

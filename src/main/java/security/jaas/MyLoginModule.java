@@ -52,14 +52,12 @@ public class MyLoginModule implements LoginModule {
 
 
             Long userId = Factory.getInstance().getUserDAO().authUser(name, password);
-            System.out.println("UserId: " + userId);
             if (userId != null) {
                 Set<Role> roles = Factory.getInstance().getUserDAO().getUserRolesById(userId);
                 login = name;
                 userGroups = new ArrayList<String>();
-                for (Role role : roles)
-                    userGroups.add(role.getRoleName());
-                System.out.println("sss");
+                for (Role role : roles){
+                    userGroups.add(role.getRoleName());}
                 return true;
             }
 

@@ -42,10 +42,10 @@ public class UserDAOImpl implements UserDAO {
         Set<Role> roles = new HashSet();
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-
             User user = (User) session.load(User.class, id);
+            System.out.println("q2");
             roles = user.getRoles();
-
+            System.out.println("q3");
             for (Role role : roles) {
                 System.out.println("Role: " + role.getRoleName());
             }
@@ -90,9 +90,7 @@ public class UserDAOImpl implements UserDAO {
         Session session = null;
         Auth auth = null;
         try {
-            System.out.println("Before auth");
             session = HibernateUtil.getSessionFactory().openSession();
-            System.out.println("After session");
 
             String query = "from Auth where userName=:username and password=:password";
             auth = (Auth) session.createQuery(query)
@@ -101,9 +99,7 @@ public class UserDAOImpl implements UserDAO {
                     .uniqueResult();
 
         } catch (org.hibernate.NonUniqueResultException e) {
-            System.out.println("Perviy catch");
         } catch (Exception e) {
-            System.out.println("Second catch");
             JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O", JOptionPane.OK_OPTION);
         } finally {
             if (session != null && session.isOpen()) {

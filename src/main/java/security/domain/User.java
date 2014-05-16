@@ -2,6 +2,7 @@ package security.domain;
 
 
 import javax.persistence.*;
+import java.security.Principal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +12,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "user")
-public class User {
+public class User  {
 
     @Id
     @Column(name = "user_id")
@@ -134,6 +135,11 @@ public class User {
     public void setAuth(Auth auth) {
         this.auth = auth;
     }
+
+//    @Override
+//    public String getName() {
+//        return "user1";
+//    }
 }
 
 

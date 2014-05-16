@@ -1,6 +1,7 @@
 package security.domain;
 
 import javax.persistence.*;
+import java.security.Principal;
 
 /**
  * Created by 1 on 24.04.2014.
@@ -46,4 +47,6 @@ public class Role {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+
 }

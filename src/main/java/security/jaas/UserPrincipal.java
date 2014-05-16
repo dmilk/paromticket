@@ -20,4 +20,8 @@ public class UserPrincipal implements Principal {
     return name;
   }
 
+    public String getS() {
+        return "S";
+    }
+
 }
