@@ -10,10 +10,7 @@ import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class MyLoginModule implements LoginModule {
 
@@ -54,7 +51,7 @@ public class MyLoginModule implements LoginModule {
 
             securityUser = Factory.getInstance().getUserDAO().authUser(name, password);
             if (securityUser != null) {
-                System.out.println("Login: " + securityUser.getUserName());
+                System.out.println("Login: " + securityUser.getLogin());
                 return true;
             }
 
@@ -73,7 +70,7 @@ public class MyLoginModule implements LoginModule {
     @Override
     public boolean commit() throws LoginException {
 
-        userPrincipal = new UserPrincipal(securityUser.getUserName());
+        userPrincipal = new UserPrincipal(securityUser.getLogin());
         subject.getPrincipals().add(userPrincipal);
 
         if (securityUser.getRoles() != null && securityUser.getRoles().size() > 0) {

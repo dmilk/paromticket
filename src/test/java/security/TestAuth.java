@@ -16,7 +16,7 @@ public class TestAuth {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        assertEquals(securityUser.getUserName(), "admin");
+        assertEquals(securityUser.getLogin(), "admin");
 
     }
 }

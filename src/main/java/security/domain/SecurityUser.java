@@ -17,8 +17,8 @@ public class SecurityUser {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "username", unique = true, nullable = false)
-    private String userName;
+    @Column(name = "login", unique = true, nullable = false)
+    private String login;
 
     @Column(name="password", nullable = false)
     private String password;
@@ -38,12 +38,12 @@ public class SecurityUser {
         this.roles = roles;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
