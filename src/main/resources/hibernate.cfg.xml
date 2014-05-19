@@ -32,7 +32,7 @@
         <!--<mapping resource="Event.hbm.xm_"/>-->
         <mapping class="security.domain.User"/>
         <mapping class="security.domain.Role"/>
-        <mapping class="security.domain.Auth"/>
+        <mapping class="security.domain.SecurityUser"/>
 
 
     </session-factory>

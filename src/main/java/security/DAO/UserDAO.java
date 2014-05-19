@@ -1,5 +1,6 @@
 package security.DAO;
 
+import security.domain.SecurityUser;
 import security.domain.User;
 
 import java.sql.SQLException;
@@ -12,7 +13,6 @@ import java.util.Set;
 public interface UserDAO {
     //public void addUser(User user) throws SQLException;
     public User getUserById(Long id) throws SQLException;    //получить стедента по id
-    public Set getUserRolesById(Long id);
     public String getUserGreetings(Long id);
-    public Long authUser(String userName, String password) throws SQLException;
+    public SecurityUser authUser(String userName, String password) throws SQLException;
 }

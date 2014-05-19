@@ -3,7 +3,7 @@ package security.DAO.Impl;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import security.DAO.UserDAO;
-import security.domain.Auth;
+import security.domain.SecurityUser;
 import security.domain.Role;
 import security.domain.User;
 import util.HibernateUtil;
@@ -36,33 +36,7 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
-    @Override
-    public Set getUserRolesById(Long id) {
-        Session session = null;
-        Set<Role> roles = new HashSet();
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            User user = (User) session.load(User.class, id);
-            System.out.println("q2");
-            roles = user.getRoles();
-            System.out.println("q3");
-            for (Role role : roles) {
-                System.out.println("Role: " + role.getRoleName());
-            }
-//                String query = "from Role where userId=:id";
-//            roles = (Set<Role>) session.createQuery(query)
-//                    .setParameter("id", id)
-//                    .list();
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O", JOptionPane.OK_OPTION);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return roles;
-    }
 
     @Override
     public String getUserGreetings(Long id) {
@@ -86,17 +60,20 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
-    public Long authUser(String userName, String password) throws SQLException {
+    public SecurityUser authUser(String userName, String password) throws SQLException {
         Session session = null;
-        Auth auth = null;
+        SecurityUser securityUser = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
 
-            String query = "from Auth where userName=:username and password=:password";
-            auth = (Auth) session.createQuery(query)
+            String query = "from SecurityUser where userName=:username and password=:password";
+            securityUser = (SecurityUser) session.createQuery(query)
                     .setParameter("username", userName)
                     .setParameter("password", password)
                     .uniqueResult();
+
+            Hibernate.initialize(securityUser);
+            Hibernate.initialize(securityUser.getRoles());
 
         } catch (org.hibernate.NonUniqueResultException e) {
         } catch (Exception e) {
@@ -106,9 +83,6 @@ public class UserDAOImpl implements UserDAO {
                 session.close();
             }
         }
-        if (auth != null)
-            return auth.getUserId();
-        else
-            return null;
+            return securityUser;
     }
 }

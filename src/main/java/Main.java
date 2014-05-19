@@ -1,5 +1,6 @@
 import security.DAO.Factory;
 import security.domain.Role;
+import security.domain.SecurityUser;
 import security.domain.User;
 
 import java.sql.SQLException;
@@ -8,10 +9,12 @@ import java.util.Set;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        Long userId = Factory.getInstance().getUserDAO().authUser("admin","12345");
+        SecurityUser securityUser = Factory.getInstance().getUserDAO().authUser("admin","12345");
         System.out.println("*************");
-        System.out.println(userId);
-        Set<Role> roles = Factory.getInstance().getUserDAO().getUserRolesById(userId);
+        System.out.println(securityUser.getUserName());
+//        Set<Role> roles = Factory.getInstance().getUserDAO().getUserRolesById(userId);
+        for(Role role : securityUser.getRoles())
+            System.out.println("Role: " + role.getRoleName());
 
 
 

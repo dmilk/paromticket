@@ -146,8 +146,8 @@
                             <srcFiles>
                                 <srcFile>src/main/resources/sql/user.sql</srcFile>
                                 <srcFile>src/main/resources/sql/role.sql</srcFile>
-                                <srcFile>src/main/resources/sql/user_role.sql</srcFile>
-                                <srcFile>src/main/resources/sql/auth.sql</srcFile>
+                                <srcFile>src/main/resources/sql/security_user.sql</srcFile>
+                                <srcFile>src/main/resources/sql/security_user_role.sql</srcFile>
                                 <!--<onError>continue</onError>-->
                             </srcFiles>
                         </configuration>

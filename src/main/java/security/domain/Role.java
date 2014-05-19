@@ -8,8 +8,7 @@ import java.security.Principal;
  */
 @Entity
 @Table(name = "role")
-public class Role {
-
+public class Role{
     @Id
     @Column(name = "role_id")
     @GeneratedValue
@@ -18,8 +17,6 @@ public class Role {
     @Column(name = "role_name")
     private String roleName;
 
-    @Column(name = "comment")
-    private String comment;
 
     public Role() {
     }
@@ -40,13 +37,7 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public String getComment() {
-        return comment;
-    }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 
 
 }

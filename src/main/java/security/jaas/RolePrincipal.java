@@ -5,9 +5,9 @@ import java.security.Principal;
 public class RolePrincipal implements Principal {
   
   private String name;
-  
+
   public RolePrincipal(String name) {
-    super();
+//    super();
     this.name = name;
   }
 

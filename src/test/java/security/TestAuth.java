@@ -3,19 +3,20 @@ package security;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import security.DAO.Factory;
+import security.domain.SecurityUser;
 
 import java.sql.SQLException;
 
 public class TestAuth {
     @Test
     public void testAdminLogin() {
-        long id = 0;
+        SecurityUser securityUser = null;
         try {
-            id = Factory.getInstance().getUserDAO().authUser("admin", "12345");
+            securityUser = Factory.getInstance().getUserDAO().authUser("admin", "12345");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        assertEquals(id, 1L);
+        assertEquals(securityUser.getUserName(), "admin");
 
     }
 }

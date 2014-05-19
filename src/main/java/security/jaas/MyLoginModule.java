@@ -2,6 +2,7 @@ package security.jaas;
 
 import security.DAO.Factory;
 import security.domain.Role;
+import security.domain.SecurityUser;
 
 import javax.security.auth.Subject;
 import javax.security.auth.callback.*;
@@ -20,8 +21,8 @@ public class MyLoginModule implements LoginModule {
     private Subject subject;
     private UserPrincipal userPrincipal;
     private RolePrincipal rolePrincipal;
-    private String login;
-    private List<String> userGroups;
+
+    private SecurityUser securityUser;
 
     @Override
 
@@ -51,17 +52,12 @@ public class MyLoginModule implements LoginModule {
             System.out.println("Pass: " + password);
 
 
-            Long userId = Factory.getInstance().getUserDAO().authUser(name, password);
-            if (userId != null) {
-                Set<Role> roles = Factory.getInstance().getUserDAO().getUserRolesById(userId);
-                login = name;
-                userGroups = new ArrayList<String>();
-                for (Role role : roles){
-                    userGroups.add(role.getRoleName());}
+            securityUser = Factory.getInstance().getUserDAO().authUser(name, password);
+            if (securityUser != null) {
+                System.out.println("Login: " + securityUser.getUserName());
                 return true;
             }
 
-            // If credentials are NOT OK we throw a LoginException
             throw new LoginException("Authentication failed");
 
         } catch (IOException e) {
@@ -77,16 +73,16 @@ public class MyLoginModule implements LoginModule {
     @Override
     public boolean commit() throws LoginException {
 
-        userPrincipal = new UserPrincipal(login);
+        userPrincipal = new UserPrincipal(securityUser.getUserName());
         subject.getPrincipals().add(userPrincipal);
 
-        if (userGroups != null && userGroups.size() > 0) {
-            for (String groupName : userGroups) {
-                rolePrincipal = new RolePrincipal(groupName);
+        if (securityUser.getRoles() != null && securityUser.getRoles().size() > 0) {
+            for (Role role : securityUser.getRoles()) {
+                System.out.printf("Role: " + role.getRoleName());
+                rolePrincipal = new RolePrincipal(role.getRoleName());
                 subject.getPrincipals().add(rolePrincipal);
             }
         }
-
         return true;
     }
 

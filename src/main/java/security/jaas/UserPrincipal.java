@@ -7,7 +7,7 @@ public class UserPrincipal implements Principal {
   private String name;
   
   public UserPrincipal(String name) {
-    super();
+//    super();
     this.name = name;
   }
 
