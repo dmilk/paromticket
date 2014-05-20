@@ -1,6 +1,7 @@
 package resource;
 
-
+import security.DAO.Factory;
+import security.domain.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
@@ -11,23 +12,24 @@ import javax.ws.rs.core.MediaType;
 import java.security.Principal;
 
 /**
- * Created by 1 on 16.05.2014.
+ * Created by 1 on 20.05.2014.
  */
-@Path("/first")
-public class First {
-
+@Path("/help")
+public class Helper {
     @GET
-    @Path("f")
+    @Path("greeting")
     @Produces(MediaType.APPLICATION_JSON)
     public String getGreeting(@Context HttpServletRequest req) {
 
-//        List<Todo> todos = new ArrayList<Todo>();
-//        todos.addAll(TodoDao.instance.getModel().values());
         Principal principal = req.getUserPrincipal();
 
-        if (principal == null)
+        if (principal == null) {
             return "Guest";
-        else
-            return principal.getName();
+        } else {
+            String login = principal.getName();
+            User user = Factory.getInstance().getUserDAO().getUserByLogin(login);
+            return user.getFirstName() + " " + user.getLastName();
+        }
+
     }
 }

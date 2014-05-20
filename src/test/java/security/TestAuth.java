@@ -12,7 +12,7 @@ public class TestAuth {
     public void testAdminLogin() {
         SecurityUser securityUser = null;
         try {
-            securityUser = Factory.getInstance().getUserDAO().authUser("admin", "12345");
+            securityUser = Factory.getInstance().getSecurityUserDAO().authUser("admin", "12345");
         } catch (SQLException e) {
             e.printStackTrace();
         }

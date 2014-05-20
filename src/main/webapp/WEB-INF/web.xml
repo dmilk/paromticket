@@ -20,7 +20,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Orders</web-resource-name>
-            <url-pattern>/order/*</url-pattern>
+            <url-pattern>/order/first/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>user</role-name>

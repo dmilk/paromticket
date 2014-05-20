@@ -75,7 +75,7 @@ public class MyLoginModule implements LoginModule {
                 throw new LoginException("Callback handler does not return authentication data properly");
             }
 
-            securityUser = Factory.getInstance().getUserDAO().authUser(login, password);
+            securityUser = Factory.getInstance().getSecurityUserDAO().authUser(login, password);
             if (securityUser != null) {
                 System.out.println("Login: " + securityUser.getLogin());
                 loginSucceeded = true;
@@ -91,14 +91,14 @@ public class MyLoginModule implements LoginModule {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("BEFORE RETURN FALSE FROM LOGIN");
         return false;
     }
 
     @Override
     public boolean commit() throws LoginException {
+        System.out.println("ENTER COMMIT");
         if (loginSucceeded) {
-            return false;
-        } else {
             userPrincipal = new UserPrincipal(securityUser.getLogin());
 
             if (!subject.getPrincipals().contains(userPrincipal)) {
@@ -114,15 +114,16 @@ public class MyLoginModule implements LoginModule {
                         LOGGER.debug("Role principal added: " + rolePrincipal);
                     }
                 }
+                commitSucceeded = true;
 
+                LOGGER.info("Login subject were successfully commited");
+
+                return true;
             }
-
-            commitSucceeded = true;
-
-            LOGGER.info("Login subject were successfully commited");
-
-            return true;
+            throw new LoginException("Authentication failed");
         }
+        System.out.println("!!! LOGIN NOT SUCCESS");
+        return false;
     }
 
     @Override

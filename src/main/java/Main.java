@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        SecurityUser securityUser = Factory.getInstance().getUserDAO().authUser("admin","12345");
+        SecurityUser securityUser = Factory.getInstance().getSecurityUserDAO().authUser("admin","12345");
         System.out.println("*************");
         System.out.println(securityUser.getLogin());
 //        Set<Role> roles = Factory.getInstance().getUserDAO().getUserRolesById(userId);
