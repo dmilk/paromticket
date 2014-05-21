@@ -1,7 +1,7 @@
 package resource;
 
-import security.DAO.Factory;
-import security.domain.User;
+import DAO.Factory;
+import domain.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
@@ -14,7 +14,7 @@ import java.security.Principal;
 /**
  * Created by 1 on 20.05.2014.
  */
-@Path("/help")
+@Path("/helper")
 public class Helper {
     @GET
     @Path("greeting")

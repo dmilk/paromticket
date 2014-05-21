@@ -30,7 +30,7 @@
         <property name="hbm2ddl.auto">update</property>
 
         <!--<mapping resource="Event.hbm.xm_"/>-->
-        <mapping class="security.domain.User"/>
+        <mapping class="domain.User"/>
         <mapping class="security.domain.Role"/>
         <mapping class="security.domain.SecurityUser"/>
 

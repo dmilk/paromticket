@@ -1,4 +1,4 @@
-package security.domain;
+package domain;
 
 
 import javax.persistence.*;

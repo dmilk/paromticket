@@ -15,8 +15,6 @@ public class Main {
             System.out.println("Role: " + role.getRoleName());
 
 
-
-
 //        Student s1 = new Student();
 //        Student s2 = new Student();
 //        s1.setName("Ivanov Ivan");

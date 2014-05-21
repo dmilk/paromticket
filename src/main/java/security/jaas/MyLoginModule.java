@@ -77,7 +77,6 @@ public class MyLoginModule implements LoginModule {
 
             securityUser = Factory.getInstance().getSecurityUserDAO().authUser(login, password);
             if (securityUser != null) {
-                System.out.println("Login: " + securityUser.getLogin());
                 loginSucceeded = true;
                 return true;
             }
@@ -91,13 +90,11 @@ public class MyLoginModule implements LoginModule {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("BEFORE RETURN FALSE FROM LOGIN");
         return false;
     }
 
     @Override
     public boolean commit() throws LoginException {
-        System.out.println("ENTER COMMIT");
         if (loginSucceeded) {
             userPrincipal = new UserPrincipal(securityUser.getLogin());
 
@@ -122,7 +119,6 @@ public class MyLoginModule implements LoginModule {
             }
             throw new LoginException("Authentication failed");
         }
-        System.out.println("!!! LOGIN NOT SUCCESS");
         return false;
     }
 
@@ -147,4 +143,11 @@ public class MyLoginModule implements LoginModule {
         return true;
     }
 
+    public boolean isDebug() {
+        return debug;
+    }
+
+    public Map getOptions() {
+        return options;
+    }
 }

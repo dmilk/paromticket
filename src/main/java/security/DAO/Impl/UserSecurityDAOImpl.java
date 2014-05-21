@@ -4,7 +4,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import security.DAO.UserSecurityDAO;
 import security.domain.SecurityUser;
-import security.domain.User;
+import domain.User;
 import util.HibernateUtil;
 
 import javax.swing.*;
@@ -68,7 +68,6 @@ public class UserSecurityDAOImpl implements UserSecurityDAO {
                     .setParameter("password", password)
                     .uniqueResult();
 
-            System.out.println("BEFORE INIT");
             if (securityUser != null) {
                 Hibernate.initialize(securityUser);
                 if (securityUser.getRoles() != null)

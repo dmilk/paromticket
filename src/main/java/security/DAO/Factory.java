@@ -1,12 +1,10 @@
 package security.DAO;
 
-import security.DAO.Impl.UserDAOImpl;
 import security.DAO.Impl.UserSecurityDAOImpl;
 
 public class Factory {
     private static Factory instance = null;
     private static UserSecurityDAO userSecurityDAO = null;
-    private static UserDAO userDAO = null;
 
     public static synchronized Factory getInstance() {
         if (instance == null) {
@@ -21,13 +19,5 @@ public class Factory {
         }
         return userSecurityDAO;
     }
-
-    public UserDAO getUserDAO() {
-        if (userDAO == null) {
-            userDAO = new UserDAOImpl();
-        }
-        return userDAO;
-    }
-
 
 }

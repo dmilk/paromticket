@@ -1,6 +1,6 @@
-package security.DAO;
+package DAO;
 
-import security.domain.User;
+import domain.User;
 
 /**
  * Created by 1 on 20.05.2014.

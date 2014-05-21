@@ -1,11 +1,9 @@
 package security.DAO;
 
 import security.domain.SecurityUser;
-import security.domain.User;
+import domain.User;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by 1 on 12.05.2014.

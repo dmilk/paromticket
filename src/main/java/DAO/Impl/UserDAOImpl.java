@@ -1,9 +1,9 @@
-package security.DAO.Impl;
+package DAO.Impl;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
-import security.DAO.UserDAO;
-import security.domain.User;
+import DAO.UserDAO;
+import domain.User;
 import util.HibernateUtil;
 
 import javax.swing.*;
